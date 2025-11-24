@@ -65,25 +65,31 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
 .nav-inner{max-width:1715px;margin:0 auto;display:flex;gap:28px}
 .nav-inner a{color:#fff;text-decoration:none; cursor:pointer;}
 
-/* Dropdowns */
+/* Dropdowns with animation */
 .nav-item.has-dropdown {
     position: relative;
 }
 .nav-item.has-dropdown .dropdown {
-    display: none;
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     background: #fff;
     color: #000;
-    padding: 10px 0;
     border-radius: 6px;
     width: 200px;
-    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
     z-index: 10000;
 }
 .nav-item.has-dropdown.open .dropdown {
-    display: flex;
+    max-height: 500px;
+    opacity: 1;
+    padding: 10px 0;
 }
 .nav-item.has-dropdown .dropdown a {
     padding: 10px 16px;
@@ -183,7 +189,7 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
 
 .principal-photo{
     width:100%;
-    height:900px; /* fixed height */
+    height:900px;
     background:url('Principal.jpeg') center/cover no-repeat;
     border-radius:6px; margin-bottom:12px;
 }
@@ -205,6 +211,55 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
     border-radius:6px; margin-bottom:12px;
 }
 .muted{color:#7b848f}
+
+/* MOBILE STYLES */
+@media (max-width: 768px) {
+    .top-dark {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 4vw;
+    }
+    .brand {
+        gap: 12px;
+    }
+    .contact {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
+    }
+    
+    .nav-inner {
+        flex-direction: column;
+        gap: 0;
+    }
+    .nav-inner a, .nav-item.has-dropdown {
+        padding: 12px 0;
+        width: 100%;
+    }
+
+    .hero {
+        height: 220px;
+    }
+
+    .main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .col-right {
+        width: 100%;
+        flex: auto;
+    }
+
+    .article {
+        flex-direction: column;
+    }
+    .article .thumb {
+        width: 100%;
+        min-width: auto;
+        height: 220px;
+    }
+}
 </style>
 </head>
 <body>
@@ -223,7 +278,7 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
 
 <div class="nav-bar">
     <div class="nav-inner">
-        <a href="index.html">Home</a>
+        <a href="Index.html">Home</a>
 
         <div class="nav-item has-dropdown">
             Profile ▾
@@ -236,11 +291,11 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
         <div class="nav-item has-dropdown">
             Berita ▾
             <div class="dropdown">
-                <a href="Pengumuman">Pengumuman</a>
+                <a href="Pengumuman.html">Pengumuman</a>
             </div>
         </div>
 
-        <a href="PPDB">PPDB</a>
+        <a href="PPDB.html">PPDB</a>
         <div style="flex:1"></div>
     </div>
 </div>
@@ -323,8 +378,7 @@ Assalamu’alaikum warahmatullahi wabarakatuh.
     </div> 
 </div>
 
-
-        <div class="card">
+<div class="card">
     <h3>Tautan</h3>
     <ul class="links-list">
         <li><a href="https://www.asy-syukriyyah.sch.id" target="_blank">Yayasan Islam Asy-Syukriyyah</a></li>
@@ -333,13 +387,12 @@ Assalamu’alaikum warahmatullahi wabarakatuh.
     </ul>
 </div>
 
-
-        <div class="card">
-            <h3>Banner</h3>
-            <div class="banner" style="background-image:url('Magazine.png');"></div>
-            <div class="banner" style="background-image:url('PPDB.jpg');"></div>
-        </div>
-    </aside>
+<div class="card">
+    <h3>Banner</h3>
+    <div class="banner" style="background-image:url('Magazine.png');"></div>
+    <div class="banner" style="background-image:url('PPDB.jpg');"></div>
+</div>
+</aside>
 </div>
 </div>
 
@@ -386,4 +439,3 @@ document.addEventListener('click', () => {
 
 </body>
 </html>
-
