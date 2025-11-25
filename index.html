@@ -99,6 +99,15 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
     background: #f2f2f2;
 }
 
+/* Desktop hover for dropdown */
+@media(min-width:601px){
+  .nav-item.has-dropdown:hover .dropdown {
+    display: flex;
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
 /* HERO */
 .hero{
     width:100%; 
@@ -226,7 +235,8 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
     .logo { width: 60px; height: 60px; }
     .brand .title { font-size: 16px; }
     .contact { font-size: 13px; gap: 10px; flex-direction: column; align-items: flex-start; }
-    .nav-inner { flex-direction: column; gap: 10px; }
+    .nav-inner { flex-direction: column; gap: 10px; display: none; }
+    .nav-bar.open .nav-inner { display: flex; }
     .nav-bar { padding: 10px 10px; }
     .hero { height: 160px; }
     .announce-strip { flex-direction: column; gap: 8px; }
@@ -242,12 +252,16 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
     .card { padding: 12px; }
     .links-list li { font-size: 14px; }
     .copyright-bar { padding: 12px 0; font-size: 13px; }
-}
 
-/* Simple hamburger menu for mobile */
-@media (max-width: 600px) {
-    .nav-inner { display: none; }
-    .nav-bar.open .nav-inner { display: flex; }
+    /* Mobile dropdown toggle */
+    .nav-item.has-dropdown > a{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+    }
+
+    /* Hamburger menu */
     .hamburger {
         display: block;
         width: 36px;
@@ -273,7 +287,6 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
 @media (min-width: 601px) {
     .hamburger { display: none; }
 }
-
 </style>
 </head>
 <body>
@@ -291,11 +304,17 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
 </div>
 
 <div class="nav-bar">
+    <button class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
     <div class="nav-inner">
         <a href="Index.html">Home</a>
 
         <div class="nav-item has-dropdown">
-            Profile ▾
+            <a href="#">Profile ▾</a>
             <div class="dropdown">
                 <a href="Sejarah.html">Sejarah Sekolah</a>
                 <a href="VM.html">Visi Misi</a>
@@ -303,7 +322,7 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
         </div>
 
         <div class="nav-item has-dropdown">
-            Berita ▾
+            <a href="#">Berita ▾</a>
             <div class="dropdown">
                 <a href="Pengumuman.html">Pengumuman</a>
             </div>
@@ -422,57 +441,4 @@ const day = now.getDate();
 const year = now.getFullYear();
 const monthNames = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 const month = monthNames[now.getMonth()];
-dateBox.textContent = `${day} ${month} ${year}`;
-
-// Scroll-triggered sticky
-const navbar = document.querySelector('.nav-bar');
-const stickyOffset = 200;
-window.addEventListener('scroll', () => {
-    if (window.scrollY > stickyOffset) {
-        navbar.classList.add('sticky');
-    } else {
-        navbar.classList.remove('sticky');
-    }
-});
-
-// Dropdown click toggle (only one open at a time)
-const dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
-dropdownItems.forEach(item => {
-    item.addEventListener('click', e => {
-        e.stopPropagation();
-        dropdownItems.forEach(other => {
-            if (other !== item) other.classList.remove('open');
-        });
-        item.classList.toggle('open');
-    });
-});
-document.addEventListener('click', () => {
-    dropdownItems.forEach(item => item.classList.remove('open'));
-});
-
-// Hamburger menu for mobile
-function toggleMenu() {
-    document.querySelector('.nav-bar').classList.toggle('open');
-}
-
-// Close menu when clicking a link (for better UX)
-document.querySelectorAll('.nav-inner a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 600) {
-            document.querySelector('.nav-bar').classList.remove('open');
-        }
-    });
-});
-
-// Optional: Close menu when resizing window to desktop
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 600) {
-        document.querySelector('.nav-bar').classList.remove('open');
-    }
-});
-
-</script>
-
-</body>
-</html>
-
+dateBox.textContent = `${day}
