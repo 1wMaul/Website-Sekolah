@@ -235,7 +235,40 @@ body{font-family:Inter, Arial, Helvetica, sans-serif;background:#d9d9d9;color:#1
     .nav-item.has-dropdown .dropdown { position: static; width: 100%; background: #6f7380; border-radius: 0; padding: 0; }
     .nav-item.has-dropdown .dropdown a { color: #fff; padding: 10px 20px; }
     .nav-item.has-dropdown .dropdown a:hover { background: #5e616d; }
-    .hamburger { display: block; }
+    /* Hamburger menu for mobile */
+@media (max-width: 600px) {
+    .hamburger {
+        display: block;
+        width: 42px;              /* bigger clickable area */
+        height: 42px;
+        background: #f2d94a;      /* bright background */
+        border-radius: 6px;        /* rounded corners */
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        z-index: 200;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        transition: all 0.2s ease;
+    }
+    .hamburger:hover {
+        background: #e9d94a;       /* subtle hover effect */
+    }
+    .hamburger span {
+        display: block;
+        width: 28px;
+        height: 4px;
+        margin: 4px 0;
+        background: #111;           /* darker for contrast */
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+}
+
 
     .hero { height: 160px; }
     .announce-strip { flex-direction: column; gap: 8px; }
